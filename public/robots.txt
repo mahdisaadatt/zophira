@@ -1,0 +1,22 @@
+# robots.txt for Zophira
+# Guides search engine crawlers on what to crawl.
+
+User-agent: *
+# Disallow sensitive or non-content pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /account
+Disallow: /profile
+Disallow: /orders
+Disallow: /dashboard
+Disallow: /search
+
+# Allow everything else
+Allow: /
+
+# Point crawlers to your sitemap (update to absolute URL in production if needed)
+Sitemap: https://zophira.ir/sitemap.xml

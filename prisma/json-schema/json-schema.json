@@ -1,0 +1,1337 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "emailVerified": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "default": "CUSTOMER",
+          "enum": [
+            "CUSTOMER",
+            "ADMIN",
+            "SUPER_ADMIN"
+          ]
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": true
+        },
+        "passwordResetToken": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "passwordResetExpires": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastLogin": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "payments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Payment"
+          }
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "cart": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CartItem"
+          }
+        },
+        "blogPosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlogPost"
+          }
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        }
+      },
+      "required": [
+        "email",
+        "updatedAt"
+      ]
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "default": "SHIPPING",
+          "enum": [
+            "SHIPPING",
+            "BILLING",
+            "BOTH"
+          ]
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "default": "IR"
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isDefault": {
+          "type": "boolean",
+          "default": false
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      },
+      "required": [
+        "userId",
+        "firstName",
+        "lastName",
+        "addressLine1",
+        "city",
+        "state",
+        "postalCode",
+        "updatedAt"
+      ]
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "icon": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parent": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Category"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Category"
+          }
+        },
+        "metaTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortOrder": {
+          "type": "integer",
+          "default": 0
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "slug",
+        "updatedAt"
+      ]
+    },
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "logo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "slug",
+        "updatedAt"
+      ]
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shortDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "price": {
+          "type": "number"
+        },
+        "comparePrice": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rating": {
+          "type": "number",
+          "default": 0
+        },
+        "reviewCount": {
+          "type": "integer",
+          "default": 0
+        },
+        "sku": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "barcode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trackQuantity": {
+          "type": "boolean",
+          "default": true
+        },
+        "quantity": {
+          "type": "integer",
+          "default": 0
+        },
+        "lowStockThreshold": {
+          "type": "integer",
+          "default": 10
+        },
+        "weight": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "dimensions": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Category"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "brand": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Brand"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductImage"
+          }
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductVariant"
+          }
+        },
+        "metaTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "default": "DRAFT",
+          "enum": [
+            "DRAFT",
+            "ACTIVE",
+            "INACTIVE",
+            "ARCHIVED"
+          ]
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": true
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "default": false
+        },
+        "dentalCategory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "TOOTHPASTE",
+            "TOOTHBRUSH",
+            "MOUTHWASH",
+            "DENTAL_FLOSS",
+            "WHITENING",
+            "ORTHODONTIC",
+            "DENTURE_CARE",
+            "KIDS_DENTAL",
+            "PROFESSIONAL",
+            "ACCESSORIES"
+          ]
+        },
+        "ageGroup": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "BABY",
+            "KIDS",
+            "TEENS",
+            "ADULTS",
+            "SENIORS",
+            "ALL_AGES"
+          ]
+        },
+        "ingredients": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "usage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "warnings": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "countryOfOrigin": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expiryPeriod": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "packaging": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "certificates": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "volume": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "orderItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        },
+        "cartItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CartItem"
+          }
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "slug",
+        "price",
+        "updatedAt"
+      ]
+    },
+    "ProductImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "altText": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sortOrder": {
+          "type": "integer",
+          "default": 0
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "productId",
+        "url"
+      ]
+    },
+    "ProductVariant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sku": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "price": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "default": 0
+        },
+        "attributes": {
+          "type": [
+            "number",
+            "string",
+            "boolean",
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "productId",
+        "name",
+        "attributes"
+      ]
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orderNumber": {
+          "type": "string"
+        },
+        "subtotal": {
+          "type": "number"
+        },
+        "taxAmount": {
+          "type": "number",
+          "default": 0
+        },
+        "shippingFee": {
+          "type": "number",
+          "default": 0
+        },
+        "discount": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Discount"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "total": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "default": "PENDING",
+          "enum": [
+            "PENDING",
+            "CONFIRMED",
+            "PROCESSING",
+            "SHIPPED",
+            "DELIVERED",
+            "CANCELLED",
+            "REFUNDED"
+          ]
+        },
+        "paymentStatus": {
+          "type": "string",
+          "default": "PENDING",
+          "enum": [
+            "PENDING",
+            "PAID",
+            "FAILED",
+            "REFUNDED",
+            "PARTIALLY_REFUNDED"
+          ]
+        },
+        "shippingMethod": {
+          "type": "string",
+          "default": "REGULAR_POST",
+          "enum": [
+            "REGULAR_POST",
+            "TIPAX"
+          ]
+        },
+        "billingAddressId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shippingAddress": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Address"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "trackingNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shippedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "deliveredAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "customerNotes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "adminNotes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        },
+        "payments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Payment"
+          }
+        }
+      },
+      "required": [
+        "orderNumber",
+        "userId",
+        "subtotal",
+        "total",
+        "updatedAt"
+      ]
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "orderId",
+        "productId",
+        "quantity",
+        "price",
+        "total"
+      ]
+    },
+    "Discount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer"
+        },
+        "percent": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "maxUses": {
+          "type": "integer"
+        },
+        "usedCount": {
+          "type": "integer",
+          "default": 0
+        },
+        "minOrder": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "maxAmount": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isActive": {
+          "type": "boolean",
+          "default": true
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "code",
+        "amount",
+        "maxUses",
+        "startDate",
+        "endDate",
+        "updatedAt"
+      ]
+    },
+    "CartItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "userId",
+        "productId",
+        "quantity",
+        "updatedAt"
+      ]
+    },
+    "Review": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isApproved": {
+          "type": "boolean",
+          "default": false
+        },
+        "isVerified": {
+          "type": "boolean",
+          "default": false
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "userId",
+        "productId",
+        "rating",
+        "updatedAt"
+      ]
+    },
+    "BlogPost": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "excerpt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "featuredImage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "author": {
+          "$ref": "#/definitions/User"
+        },
+        "tags": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "default": "DRAFT",
+          "enum": [
+            "DRAFT",
+            "PUBLISHED",
+            "ARCHIVED"
+          ]
+        },
+        "isPublished": {
+          "type": "boolean",
+          "default": false
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "default": false
+        },
+        "publishedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "content",
+        "authorId",
+        "updatedAt"
+      ]
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer",
+          "default": 5
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "product": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Product"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "blogPost": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/BlogPost"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "parent": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Comment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "replies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        },
+        "isApproved": {
+          "type": "boolean",
+          "default": false
+        },
+        "isEdited": {
+          "type": "boolean",
+          "default": false
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "content",
+        "userId",
+        "updatedAt"
+      ]
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "authority": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "default": "PENDING",
+          "enum": [
+            "PENDING",
+            "PAID",
+            "FAILED",
+            "REFUNDED",
+            "PARTIALLY_REFUNDED"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "default": "ZARINPAL",
+          "enum": [
+            "BANK_TRANSFER",
+            "ZARINPAL",
+            "MELLAT",
+            "PARSIAN"
+          ]
+        },
+        "gatewayData": {
+          "type": [
+            "number",
+            "string",
+            "boolean",
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "paidAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "required": [
+        "amount",
+        "orderId",
+        "userId",
+        "updatedAt"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "user": {
+      "$ref": "#/definitions/User"
+    },
+    "address": {
+      "$ref": "#/definitions/Address"
+    },
+    "category": {
+      "$ref": "#/definitions/Category"
+    },
+    "brand": {
+      "$ref": "#/definitions/Brand"
+    },
+    "product": {
+      "$ref": "#/definitions/Product"
+    },
+    "productImage": {
+      "$ref": "#/definitions/ProductImage"
+    },
+    "productVariant": {
+      "$ref": "#/definitions/ProductVariant"
+    },
+    "order": {
+      "$ref": "#/definitions/Order"
+    },
+    "orderItem": {
+      "$ref": "#/definitions/OrderItem"
+    },
+    "discount": {
+      "$ref": "#/definitions/Discount"
+    },
+    "cartItem": {
+      "$ref": "#/definitions/CartItem"
+    },
+    "review": {
+      "$ref": "#/definitions/Review"
+    },
+    "blogPost": {
+      "$ref": "#/definitions/BlogPost"
+    },
+    "comment": {
+      "$ref": "#/definitions/Comment"
+    },
+    "payment": {
+      "$ref": "#/definitions/Payment"
+    }
+  }
+}

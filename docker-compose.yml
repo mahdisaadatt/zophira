@@ -1,0 +1,39 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=zophira
+      - POSTGRES_USER=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+    restart: always
+
+  directus:
+    image: directus/directus:latest
+    ports:
+      - 8055:8055
+    volumes:
+      - ./uploads:/directus/uploads
+    environment:
+      KEY: 'your-strong-random-key' # Replace with a long, random string
+      SECRET: 'your-strong-random-secret' # Replace with another long, random string
+
+      DB_CLIENT: 'pg'
+      DB_HOST: 'host.docker.internal' # This allows the container to see your local machine's postgres
+      DB_PORT: '5432' # Or your actual postgres port
+      DB_DATABASE: 'zophira' # Replace with your database name
+      DB_USER: 'postgres' # Replace with your database user
+      DB_PASSWORD: 'admin' # Replace with your database password
+
+      ADMIN_EMAIL: 'admin@zophira.com' # Replace with your email
+      ADMIN_PASSWORD: 'admin' # Replace with a strong password
+      
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'true' # Allows all origins, you can restrict this to your domain later
