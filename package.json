@@ -38,7 +38,6 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
-    "@rollup/rollup-win32-x64-msvc": "^4.46.4",
     "@tanstack/react-table": "^8.21.3",
     "@tinymce/tinymce-react": "^6.3.0",
     "adminjs": "^7.8.17",
