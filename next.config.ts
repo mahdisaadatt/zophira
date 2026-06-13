@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
+const nextConfig: any = {
   eslint: {
     // این خط باعث می‌شود ورسل با وجود ارورهای eslint بیلد را ادامه دهد
     ignoreDuringBuilds: true,
